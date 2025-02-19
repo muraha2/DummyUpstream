@@ -33,7 +33,7 @@ Now, use the pulled image to start a container. Replace YOUR_GITHUB_TOKEN and YO
 ```
 docker run -d \
   --name github-runner1 \
-  -e REPO_URL="https://" \
+  -e REPO_URL="https://github.com/muraha2/DummyUpstream" \
   -e RUNNER_NAME="my-docker-runner-1" \
   -e RUNNER_TOKEN="YOUR_GITHUB_TOKEN" \
   -e RUNNER_WORKDIR="/tmp/github-runner-1" \
