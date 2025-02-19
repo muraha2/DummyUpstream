@@ -42,7 +42,7 @@ jobs:
     needs: Test
     steps:
     - name: Upload log file as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ci-logs
         path: ci_logs.txt
