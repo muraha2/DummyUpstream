@@ -1,6 +1,8 @@
 # best-test-package-ever
 Dummy project for testing
 
+-= New changes for new version =-
+
 # steps:
 (rm -rf build) \
 mkdir build \
