@@ -1,0 +1,48 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main", "qnx-8.0.1" ]
+  pull_request:
+    branches: [ "main", "qnx-8.0.1"  ]
+
+jobs:
+  Deps:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install dependencies
+      run: sudo apt update && sudo apt install -y cmake g++ # brew install cmake gcc - for macOS
+    - name: Configure CMake
+      run: cmake -B build  # Creates build/ and runs CMake
+
+  Build:
+    runs-on: self-hosted
+    needs: Deps
+    steps:
+    - name: Build the project
+      run: |
+        echo "Building the project..." > ci_logs.txt
+        cmake --build build >> ci_logs.txt 2>&1
+        echo "Build completed" >> ci_logs.txt
+
+  Test:
+    runs-on: self-hosted
+    needs: Build
+    steps:
+    - name: Run tests
+      run: |
+        echo "Running tests..." >> ci_logs.txt
+        ./build/tests >> ci_logs.txt 2>&1
+        echo "Tests completed" >> ci_logs.txt
+
+  Logs:
+    runs-on: self-hosted
+    needs: Test
+    steps:
+    - name: Upload log file as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ci-logs
+        path: ci_logs.txt
