@@ -2,6 +2,7 @@
 Dummy project for testing
 
 -= New changes for new version =-
+-= New changes that are not in forked version =-
 
 # steps:
 (rm -rf build) \
